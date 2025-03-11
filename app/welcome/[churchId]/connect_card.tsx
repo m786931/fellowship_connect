@@ -1,18 +1,18 @@
 'use client';
-import { ConnectFormState } from '../types';
+import { ConnectCard, ConnectFormState } from '../../types';
 import { useActionState, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import SubmitButton from '@/app/components/SubmitButton';
 import { formHandlerAction } from './actions';
-import { StringMap } from '../types'
-
+//import { StringMap } from '../../types'
+import { useParams } from 'next/navigation';
 
 import { IoIosPeople } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { BsHouseFill } from "react-icons/bs";
 import { FaPhoneVolume } from "react-icons/fa6";
 
-const initialState: ConnectFormState<StringMap> = {};
+const initialState: ConnectFormState<ConnectCard> = {};
 
 export function Connect_Card() {
   // useActionState is available with React 19 (Next.js App Router)
@@ -23,6 +23,10 @@ export function Connect_Card() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);  
   const [showTextArea, setShowTextArea] = useState(false);
+  const params = useParams();
+  const churchId = params.churchId;
+
+  console.log("this is the church id: " + churchId);
 
   useEffect(() => {
     if (serverState.successMsg) {
@@ -30,7 +34,7 @@ export function Connect_Card() {
       formRef.current?.reset();
     }
   }, [serverState]);
-
+console.log("ServerState: " + serverState.successMsg)
     useEffect(() => {
         if (showTextArea && inputRef.current) {
                 inputRef?.current?.focus();
@@ -188,19 +192,24 @@ export function Connect_Card() {
             </div>
           </div>
           <div className="h-20 bg-gray-400 flex items-center justify-left w-full">
-            <input type="checkbox" id="firstTime" className="scale-150 ml-2 gap-4" />
-            <span className="text-white ml-4 text-center justify-center">FIRST TIME GUESS</span>
-          </div>
-
-<div className="h-20 bg-blue-200 flex items-center justify-left w-full">
             <input 
             type="checkbox" 
             id="firstTime" 
             name="firstTime"
+            checked={serverState.data?.firstTime}
+            className="scale-150 ml-2 gap-4" />
+            <span className="text-white ml-4 text-center justify-center">FIRST TIME GUESS</span>
+          </div>
+
+          <div className="h-20 bg-blue-200 flex items-center justify-left w-full">
+            <input 
+            type="checkbox" 
+            id="chkComment" 
+            name="chkComment"
             onChange={checkHandler}
             className="scale-150 ml-2 gap-4"/>
             <span className="text-white ml-4 text-center justify-center">QUESTION, COMMENT OR PRAYER</span>
-        </div> 
+          </div> 
         {showTextArea && (
                 <div className="h-40 flex flex-col expanded-content">
                     <textarea className='h-40' ref={inputRef} id="comment" name="comment" placeholder="Enter your question, comment or prayer request here"></textarea>
@@ -214,7 +223,12 @@ export function Connect_Card() {
             className="scale-150 ml-2 gap-4"/>
             <span className="text-white ml-4 text-center justify-center">I WOULD LIKE TO TALK TO THE PASTOR</span>
         </div>   
-
+        <input
+        type="hidden"
+        name="hdnChurchId"
+        id="hdnChurchId"
+        value={churchId}
+        />
           <SubmitButton />
         </div>
       </form>

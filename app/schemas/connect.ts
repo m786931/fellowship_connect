@@ -1,10 +1,12 @@
 import { z } from "zod";
 
 export const connectSchema = z.object({
-  firstname: z
+  churchId: z
+  .string(),
+  firstName: z
     .string({ message: 'First name is required' })
     .min(1, 'First name should have at least 1 character'),
-  lastname: z
+  lastName: z
     .string({ message: 'Last name is required' })
     .min(2, 'Last name should have at least 2 characters'),
   email: z
@@ -35,12 +37,11 @@ export const connectSchema = z.object({
     .max(20)
     .optional()
     .or(z.literal('')),
-  firsttime: z
+  firstTime: z
     .boolean({ message: 'Problem with first time choice' }),
   comment: z
     .string()
-    .optional()
-    .or(z.literal('')),
+    .optional(),
   callMe: z
     .boolean({ message: 'Problem with would like to talk to Pastor' })
 });
