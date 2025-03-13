@@ -46,8 +46,8 @@ console.log("ServerState: " + serverState.successMsg)
     };
   
   return (
-    <div className='p-0'>
-      <form action={formAction} ref={formRef} className="w-full mx-auto p-1 bg-white rounded-lg shadow-md">
+    <div className='pt-20 px-3'>
+      <form action={formAction} ref={formRef} className="max-w mx-auto p-1 bg-white rounded-lg shadow-md">
         <div className="flex flex-col gap-y-2">
           <div>
             <div className="flex flex-row gap-x-4">
