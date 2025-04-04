@@ -33,8 +33,7 @@ const Navbar = () => {
           </a>
         </h1>
       </div>
-
-      <ul className="hidden md:flex">
+      {/* <ul className="hidden md:flex">
         {links.map(({ id, link }) => (
           <li
             key={id}
@@ -65,7 +64,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   );
 };
