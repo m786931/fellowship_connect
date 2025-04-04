@@ -1,10 +1,13 @@
 "use client"
+import React from "react";
 
+const Navbar = () => {
+{/*
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const Navbar = () => {
+
     const [nav, setNav] = useState(false);
 
   const links = [
@@ -17,7 +20,7 @@ const Navbar = () => {
       link: "comment",
     },
   ];
-
+*/}
   return (
     <div className="flex justify-between items-center w-full h-20 px-4 text-white bg-blue-400 fixed nav">
       <div>
